@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Fredoka:wght@400;500&display=swap');
+
+/* --- GLOBAL RESET & THEME --- */
+:root {
+  font-family: 'Quicksand', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #555; /* Soft grey text instead of harsh black */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Important: The Canvas handles scrolling */
+  background: #E0F7FA; /* Very light Cinnamoroll Cyan */
+}
+
+/* --- CUSTOM CUTE SCROLLBAR --- */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #ffffff; }
+::-webkit-scrollbar-thumb { 
+  background: #BDE0FE; 
+  border-radius: 10px; 
+  border: 3px solid #ffffff; 
+}
+
+/* --- TYPOGRAPHY UTILITIES --- */
+.font-header { font-family: 'Fredoka', sans-serif; }
+.font-body { font-family: 'Quicksand', sans-serif; }
+
+h1, h2, h3 {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+}
+
+/* --- LINKS & BUTTONS --- */
+a {
+  font-weight: 600;
+  color: #5AA9E6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover { color: #FFB7B2; }
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(137, 207, 240, 0.4);
+}
+button:active { transform: translateY(0); }
+
+/* --- LAYOUT --- */
+.section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Default center, can be overridden inline */
+}
+
+/* --- CUTE CARD STYLE (The "Sticker" Look) --- */
+.cute-card {
+  background: white;
+  border-radius: 40px;
+  border: 6px solid #fff; /* Thick white border */
+  padding: 3rem;
+  
+  /* Soft double shadow for depth */
+  box-shadow: 
+    0 10px 25px rgba(137, 207, 240, 0.25), 
+    0 0 0 4px rgba(255, 255, 255, 0.5); 
+    
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.cute-card:hover {
+  transform: translateY(-5px);
+}
+
+/* The Dashed Inner Border Effect */
+.cute-card::after {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border: 2px dashed #BDE0FE; /* Baby blue dashes */
+  border-radius: 28px;
+  pointer-events: none;
+}
