@@ -1,6 +1,7 @@
 import { Scroll } from '@react-three/drei'
 import Essay1 from './assets/Econ 197 - Essay 1.pdf'
 import Essay2 from './assets/Short Essay 2.pdf'
+import Essay4 from './assets/Wang_Junye_SOP_Management_Strategy.pdf'
 
 const Section = ({ children, align = "center" }) => {
   return (
@@ -82,15 +83,16 @@ export const Overlay = () => {
 
             {/* Placeholder for Paper 3 */}
             <div style={{ background: '#f0f0f0', padding: '15px 25px', borderRadius: '25px', border: '2px dashed #ccc', color: '#999' }}>
-               <b className="font-header">Paper 3</b>
-               <br/><span style={{fontSize: '0.8rem'}}>Coming Soon</span>
+               <b className="font-header"></b>
+               <br/><span style={{fontSize: '0.8rem'}}>View PDF</span>
             </div>
 
-            {/* Placeholder for Paper 4 */}
-            <div style={{ background: '#f0f0f0', padding: '15px 25px', borderRadius: '25px', border: '2px dashed #ccc', color: '#999' }}>
-               <b className="font-header">Paper 4</b>
-               <br/><span style={{fontSize: '0.8rem'}}>Coming Soon</span>
-            </div>
+            <a href={Essay4} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#E7F9F2', padding: '15px 25px', borderRadius: '25px', border: '2px solid #5AA9E6', color: '#555', cursor: 'pointer' }}>
+                <b className="font-header">Essay 4: Statement of Purpose</b>
+                <br/><span style={{fontSize: '0.8rem'}}>View PDF</span>
+              </div>
+            </a>
         </div>
       </Section>
 
