@@ -1,8 +1,19 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { ScrollControls, Cloud, Float, Scroll, Sparkles } from '@react-three/drei'
-import { useRef } from 'react'
+import { ScrollControls, Cloud, Float, Scroll, Sparkles, useScroll } from '@react-three/drei'
+import { useEffect, useRef, useState } from 'react'
 import { Overlay } from './Overlay'
+import { TopNav } from './TopNav'
 import './App.css'
+
+// Hands the ScrollControls' real scrollable DOM element up to App state so
+// the fixed TopNav (which lives outside the Canvas) can jump to a section.
+function ScrollBridge({ onReady }) {
+  const scroll = useScroll()
+  useEffect(() => {
+    onReady(scroll.el)
+  }, [scroll.el, onReady])
+  return null
+}
 
 // A custom component for background elements that move when you scroll
 function BackgroundElements() {
@@ -43,23 +54,29 @@ function BackgroundElements() {
 
 
 export default function App() {
+  const [scrollEl, setScrollEl] = useState(null)
+
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-      {/* 1. LIGHTING (Soft & Bright) */}
-      <ambientLight intensity={1} color="#ffffff" />
-      <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
-      {/* 2. BACKGROUND COLOR (Sky) */}
-      <color attach="background" args={['#BDE0FE']} />
-      {/* 3. FOG (Seamless blend into distance) */}
-      <fog attach="fog" args={['#BDE0FE', 5, 20]} />
-      {/* 4. SCROLL CONTROLS */}
-      {/* pages={4} because we have 4 sections in Overlay.jsx */}
-      <ScrollControls pages={4} damping={0.3}>
-        {/* The 3D World */}
-        <BackgroundElements />
-        {/* The HTML Overlay (from Overlay.jsx) */}
-        <Overlay />
-      </ScrollControls>
-    </Canvas>
+    <>
+      <TopNav scrollEl={scrollEl} />
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        {/* 1. LIGHTING (Soft & Bright) */}
+        <ambientLight intensity={1} color="#ffffff" />
+        <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
+        {/* 2. BACKGROUND COLOR (Sky) */}
+        <color attach="background" args={['#BDE0FE']} />
+        {/* 3. FOG (Seamless blend into distance) */}
+        <fog attach="fog" args={['#BDE0FE', 5, 20]} />
+        {/* 4. SCROLL CONTROLS */}
+        {/* pages={8} to match the 8 sections in Overlay.jsx (Hero, About, Education, Skills, Experience, Projects, Papers, Contact) */}
+        <ScrollControls pages={8} damping={0.3}>
+          <ScrollBridge onReady={setScrollEl} />
+          {/* The 3D World */}
+          <BackgroundElements />
+          {/* The HTML Overlay (from Overlay.jsx) */}
+          <Overlay />
+        </ScrollControls>
+      </Canvas>
+    </>
   )
 }

@@ -82,13 +82,136 @@ button:active { transform: translateY(0); }
     
   max-width: 600px;
   width: 90%;
+  max-height: 82vh;
+  overflow-y: auto;
   text-align: center;
   position: relative;
   transition: transform 0.3s ease;
 }
 
+@media (max-width: 600px) {
+  .cute-card { padding: 2rem 1.5rem; max-height: 78vh; }
+}
+
 .cute-card:hover {
   transform: translateY(-5px);
+}
+
+/* --- FIXED TOP NAV --- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(137, 207, 240, 0.18);
+  box-sizing: border-box;
+}
+
+.top-nav-name {
+  color: #5AA9E6;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.top-nav-jump {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.top-nav-jump-link {
+  background: transparent;
+  color: #666;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 14px;
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.top-nav-jump-link:hover {
+  color: #5AA9E6;
+  background: #E0F7FA;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 860px) {
+  .top-nav-jump { display: none; }
+}
+
+.top-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5AA9E6;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #E0F7FA;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.top-nav-link:hover {
+  color: #5AA9E6;
+  background: #FFF0F5;
+  transform: translateY(-2px);
+}
+
+.top-nav-resume {
+  width: auto;
+  border-radius: 20px;
+  padding: 0 16px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  background: #5AA9E6;
+  color: white !important;
+}
+
+.top-nav-resume:hover {
+  background: #FFB7B2;
+  color: white !important;
+}
+
+@media (max-width: 480px) {
+  .top-nav { padding: 10px 16px; }
+  .top-nav-name { font-size: 0.95rem; }
+  .top-nav-link { width: 30px; height: 30px; }
+}
+
+/* --- SKILL TAGS --- */
+.skill-tag {
+  display: inline-block;
+  background: #E0F7FA;
+  color: #3178C6;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(90, 169, 230, 0.3);
+}
+
+.skill-tag.alt {
+  background: #FFF0F5;
+  color: #E4789A;
+  border-color: rgba(255, 183, 178, 0.5);
 }
 
 /* The Dashed Inner Border Effect */
