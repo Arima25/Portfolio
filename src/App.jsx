@@ -1,6 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ScrollControls, Cloud, Float, Scroll, Sparkles, useScroll } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
+import { CanvasTexture } from 'three'
+import kittyGifUrl from './assets/hello-kitty.gif'
 import { Overlay } from './Overlay'
 import { TopNav } from './TopNav'
 import './App.css'
@@ -15,10 +17,42 @@ function ScrollBridge({ onReady }) {
   return null
 }
 
+function KittySprite() {
+  const [texture, setTexture] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    const canvas = document.createElement('canvas')
+    canvas.width = 334
+    canvas.height = 334
+    const ctx = canvas.getContext('2d')
+
+    const img = new Image()
+    img.onload = () => {
+      if (cancelled) return
+      ctx.drawImage(img, 0, 0)
+      setTexture(new CanvasTexture(canvas))
+    }
+    img.src = kittyGifUrl
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!texture) return null
+
+  return (
+    <mesh position={[-1.8, -2.3, 0.3]}>
+      <planeGeometry args={[1.4, 1.4]} />
+      <meshBasicMaterial map={texture} transparent />
+    </mesh>
+  )
+}
+
 // A custom component for background elements that move when you scroll
 function BackgroundElements() {
   const group = useRef()
-  // Optional: Rotate the whole background slowly
   useFrame((state, delta) => {
     if (group.current) {
       group.current.rotation.y += delta * 0.05
@@ -46,6 +80,10 @@ function BackgroundElements() {
             <sphereGeometry args={[0.5, 32, 32]} />
             <meshStandardMaterial color="#FFC8DD" />
           </mesh>
+        </Float>
+        {/* HELLO KITTY SPRITE (next to the blue cinnamon roll) */}
+        <Float speed={2} rotationIntensity={0.4} floatIntensity={1}>
+          <KittySprite />
         </Float>
       </Scroll>
     </group>
